@@ -10,7 +10,7 @@ class App extends React.Component {
 		const {guestStore} = this.props.route;
 
 		return (
-			<div>
+			<div className="container">
 				<DevTool/>
 				<NavigationBar/>
 				{this.props.children}

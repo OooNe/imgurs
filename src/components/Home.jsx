@@ -9,12 +9,10 @@ export default class About extends React.Component {
         const { _9gagStore } = this.props.route;
         
 		return (
-            <div className="container">
-                <div className="row">
-                    {_9gagStore._9gags.map(item => (
-                        <Thumbnail key={item.id} thumbnail={item} />
-                    ))}
-                </div>
+            <div className="row">
+                {_9gagStore._9gags.map(item => (
+                    <Thumbnail key={item.id} thumbnail={item} />
+                ))}
             </div>
 		)
 	}
