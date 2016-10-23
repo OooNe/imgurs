@@ -16,13 +16,17 @@ export default class imgurStore {
 			this.page++;
 
 			results.json().then(data => {
-				data.data.items.forEach(item => {
+				data.data.items.map(item => {
 					if (this.isImage(item.type)) {
 						item.link = this.createThumbnail(item.link);
 					}
 
-					this.imgurs.push(item)
+					return item;
 				});
+
+				setTimeout(() => {
+					this.imgurs = this.imgurs.concat(data.data.items);
+				}, 10);
 			});
 		});
 	}
