@@ -5,8 +5,8 @@ import { Router, browserHistory } from 'react-router';
 import routes from './Routes';
 import imgurStore from './stores/imgurStore';
 
-var store = new imgurStore();
-
+const store = new imgurStore();
+store.fetchData();
 
 ReactDOM.render((
     <Router history={browserHistory} routes={routes(store)}>

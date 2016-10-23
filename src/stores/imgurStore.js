@@ -4,12 +4,6 @@ export default class imgurStore {
 	@observable imgurs = [];
 	@observable page = 1;
 
-	constructor () {
-		this.fetchData().then((results) => {
-			this.imgurs = results.data.items;
-		});
-	}
-
 	@action fetchData() {
 		const request = new Request(`https://api.imgur.com/3/gallery/t/cosplay/viral/${this.page}`, {
 			headers: new Headers({
@@ -18,10 +12,13 @@ export default class imgurStore {
 			})
 		});
 
-		return new Promise((resolve, reject) => {
-			fetch(request).then(results => {
-				return resolve(results.json());
+
+		fetch(request).then((results) => {
+			this.page++;
+
+			results.json().then(data => {
+				data.data.items.forEach(item => this.imgurs.push(item));
 			});
-		})
+		});
 	}
 }
