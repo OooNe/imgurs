@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 
 import routes from './Routes';
-import _9gagStore from './stores/9gagStore';
+import imgurStore from './stores/imgurStore';
 
-var store = new _9gagStore();
+var store = new imgurStore();
 
 
 ReactDOM.render((

@@ -6,7 +6,7 @@ export default class Thumbnail extends React.Component {
 		return (
             <div className="col-xs-3">
                 <Link to={`/${this.props.thumbnail.id}`} className="thumbnail">
-                    <img src={this.props.thumbnail.images.small} />
+                    <img src={this.props.thumbnail.link} />
                 </Link>
             </div>
 		)
