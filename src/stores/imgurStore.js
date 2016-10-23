@@ -12,13 +12,34 @@ export default class imgurStore {
 			})
 		});
 
-
 		fetch(request).then((results) => {
 			this.page++;
 
 			results.json().then(data => {
-				data.data.items.forEach(item => this.imgurs.push(item));
+				data.data.items.forEach(item => {
+					if (this.isImage(item.type)) {
+						item.link = this.createThumbnail(item.link);
+					}
+
+					this.imgurs.push(item)
+				});
 			});
 		});
+	}
+
+	createThumbnail(link) {
+		const tmpArr = link.split('.');
+
+		tmpArr[tmpArr.length - 2] += 'm';
+
+		return tmpArr.join('.');
+	}
+
+	isImage(type) {
+		if (type) {
+			return type.match(/^image\//);
+		}
+
+		return false;
 	}
 }
