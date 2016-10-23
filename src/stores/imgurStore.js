@@ -4,7 +4,7 @@ export default class imgurStore {
 	@observable imgurs = [];
 	@observable page = 1;
 
-	@action fetchData() {
+	fetchData() {
 		const request = new Request(`https://api.imgur.com/3/gallery/t/cosplay/viral/${this.page}`, {
 			headers: new Headers({
 				'Content-Type': 'application/json',
