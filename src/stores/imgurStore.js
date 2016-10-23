@@ -25,7 +25,7 @@ export default class imgurStore {
 				});
 
 				setTimeout(() => {
-					this.imgurs = this.imgurs.concat(data.data.items);
+					this.imgurs = this.imgurs.concat(data.data.items.filter(item => item.nsfw === false));
 				}, 10);
 			});
 		});
