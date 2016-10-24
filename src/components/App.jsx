@@ -10,7 +10,7 @@ class App extends React.Component {
 		return (
 			<div className="container">
 				<DevTool/>
-				<NavigationBar/>
+				<NavigationBar store={this.props.route.imgurStore}/>
 				{this.props.children}
 			</div>
 		);

@@ -17,7 +17,7 @@ export default class About extends React.Component {
     fetchData() {
         this.store.fetchData();
     }
-
+    
 	render() {        
 		return (
             <div className="row">
@@ -26,8 +26,8 @@ export default class About extends React.Component {
                     hasMore={true}
                     loader={<h4>Loading...</h4>}>
                     <Masonry>
-                    {this.store.imgurs.map(item => (
-                        <Thumbnail key={item.id} thumbnail={item} />
+                    {this.store.imgurs[this.store.category].map(item => (
+                        <Thumbnail key={Math.random() * 100000} thumbnail={item} />
                     ))}
                     </Masonry>
                 </InfiniteScroll>

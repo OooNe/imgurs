@@ -1,33 +1,66 @@
 import {observable, computed, action} from 'mobx';
+import { request } from '../utils/fetch';
 
 export default class imgurStore {
-	@observable imgurs = [];
-	@observable page = 1;
+	@observable imgurs = {
+		cosplay: [],
+		funny: [],
+		gaming: []
+	};
 
-	fetchData() {
-		const request = new Request(`https://api.imgur.com/3/gallery/t/cosplay/viral/${this.page}`, {
-			headers: new Headers({
-				'Content-Type': 'application/json',
-				'Authorization': 'Client-ID 2e04b5e85391e54'
-			})
+	@observable page = {};
+	@observable category;
+	currentImgur = {};
+
+	categories = ['cosplay', 'funny', 'gaming'];
+
+	constructor() {
+		this.categories.forEach((category) => {
+			this.page[category] = 1;
 		});
 
-		fetch(request).then((results) => {
-			this.page++;
+		this.setCategory('cosplay');
+	}
 
-			results.json().then(data => {
-				data.data.items.map(item => {
-					if (this.isImage(item.type)) {
-						item.link = this.createThumbnail(item.link);
-					}
-
-					return item;
-				});
-
-				setTimeout(() => {
-					this.imgurs = this.imgurs.concat(data.data.items.filter(item => item.nsfw === false));
-				}, 10);
+	@action fetchData() {
+		const url = `https://api.imgur.com/3/gallery/t/${this.category}/viral/${this.page[this.category]}`;
+		
+		request(url)
+			.then(results => {
+				const data = this.mapImagesToThumbnail(results.data.items);
+				
+				this.mergeFetchDataWithStorage(data);
 			});
+	}
+
+	@action setCategory(category) {
+		if (this.category !== category) {
+			this.category = category;
+		}
+
+		if(!this.imgurs[this.category].length) {
+            this.fetchData();
+        }
+	}
+
+	@action fetchSingleImgur() {
+		
+	}
+
+	mergeFetchDataWithStorage(data) {
+		setTimeout(() => {
+			this.imgurs[this.category] = this.imgurs[this.category]
+				.concat(data.filter(item => item.nsfw === false));
+		}, 1);
+	}
+
+	mapImagesToThumbnail(array) {
+		return array.map(item => {
+			if (this.isImage(item.type)) {
+				item.link = this.createThumbnail(item.link);
+			}
+
+			return item;
 		});
 	}
 
