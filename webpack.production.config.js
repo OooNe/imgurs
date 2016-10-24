@@ -25,5 +25,10 @@ module.exports = {
 		new CopyWebpackPlugin([{
 			from: './index.html'
 		}]),
+		new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
 	]
 };
