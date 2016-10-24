@@ -9,10 +9,10 @@ class NavigationBar extends React.Component {
 	render() {
 		return (
 			<h1>
-				<Link to="/">Appka</Link>
-				<a href="#" onClick={() => {this.setCategory('cosplay')}}>Cosplay</a>
-				<a href="#" onClick={() => {this.setCategory('funny')}}>Funny</a>
-				<a href="#" onClick={() => {this.setCategory('gaming')}}>Gaming</a>
+				Appka
+				<Link to="/" onClick={() => {this.setCategory('cosplay')}}>Cosplay</Link>
+				<Link to="/" onClick={() => {this.setCategory('funny')}}>Funny</Link>
+				<Link to="/" onClick={() => {this.setCategory('gaming')}}>Gaming</Link>
 			</h1>
 		)
 	}

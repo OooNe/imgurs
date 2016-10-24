@@ -10,7 +10,8 @@ export default class imgurStore {
 
 	@observable page = {};
 	@observable category;
-	currentImgur = {};
+	@observable currentImgur = {};
+	@observable currentComments = [];
 
 	categories = ['cosplay', 'funny', 'gaming'];
 
@@ -25,12 +26,28 @@ export default class imgurStore {
 	@action fetchData() {
 		const url = `https://api.imgur.com/3/gallery/t/${this.category}/viral/${this.page[this.category]}`;
 		
-		request(url)
-			.then(results => {
-				const data = this.mapImagesToThumbnail(results.data.items);
-				
-				this.mergeFetchDataWithStorage(data);
-			});
+		request(url).then(results => {
+			this.page[this.category]++;
+			const data = this.mapImagesToThumbnail(results.data.items);
+
+			this.mergeFetchDataWithStorage(data);
+		});
+	}
+
+	@action fetchSingleImgur(id) {
+		const url = `https://api.imgur.com/3/image/${id}`;
+		
+		request(url).then(results => {
+			this.currentImgur = results.data;
+		});
+	}
+
+	@action fetchImgurComments(id) {
+		const url = `https://api.imgur.com/3/image/${id}/comments`;
+		
+		request(url).then(results => {
+			this.currentComments = results.data;
+		});
 	}
 
 	@action setCategory(category) {
@@ -43,21 +60,17 @@ export default class imgurStore {
         }
 	}
 
-	@action fetchSingleImgur() {
-		
-	}
-
 	mergeFetchDataWithStorage(data) {
 		setTimeout(() => {
 			this.imgurs[this.category] = this.imgurs[this.category]
-				.concat(data.filter(item => item.nsfw === false));
+				.concat(data.filter(item => item.nsfw === false && item.type));
 		}, 1);
 	}
 
 	mapImagesToThumbnail(array) {
 		return array.map(item => {
 			if (this.isImage(item.type)) {
-				item.link = this.createThumbnail(item.link);
+				item.thumbnail = this.createThumbnail(item.link);
 			}
 
 			return item;

@@ -7,7 +7,7 @@ export default class Thumbnail extends React.Component {
             <div className="col-xs-3">
                 <Link to={`/${this.props.thumbnail.id}`} className="thumbnail">
                     {!this.props.thumbnail.is_album ?
-                        <img src={this.props.thumbnail.link} /> : 
+                        <img src={this.props.thumbnail.thumbnail} /> : 
                         <p>{this.props.thumbnail.title}</p>
                     }
                 </Link>
