@@ -4,6 +4,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Masonry from 'react-masonry-component';
 
 import Thumbnail from './Thumbnail';
+import Loader from './Loader';
 
 @observer 
 export default class About extends React.Component {
@@ -24,7 +25,7 @@ export default class About extends React.Component {
                 <InfiniteScroll
                     next={this.fetchData}
                     hasMore={true}
-                    loader={<h4>Loading...</h4>}>
+                    loader={<Loader />}>
                     <Masonry>
                     {this.store.imgurs[this.store.category].map(item => (
                         <Thumbnail key={Math.random() * 100000} thumbnail={item} />

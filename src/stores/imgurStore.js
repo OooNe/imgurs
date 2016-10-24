@@ -1,5 +1,5 @@
 import {observable, computed, action} from 'mobx';
-import { request } from '../utils/fetch';
+import { request } from '../utils/utils';
 
 export default class imgurStore {
 	@observable imgurs = {
@@ -62,9 +62,13 @@ export default class imgurStore {
 
 	mergeFetchDataWithStorage(data) {
 		setTimeout(() => {
-			this.imgurs[this.category] = this.imgurs[this.category]
-				.concat(data.filter(item => item.nsfw === false && item.type));
-		}, 1);
+			data
+				.filter(item => item.nsfw === false && item.type)
+				.forEach(item => this.imgurs[this.category].push(item));
+			
+			// this.imgurs[this.category] = this.imgurs[this.category]
+			// 	.concat(data.filter(item => item.nsfw === false && item.type));
+		}, 10);
 	}
 
 	mapImages(array) {

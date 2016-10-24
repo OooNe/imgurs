@@ -7,8 +7,12 @@ import NavigationBar from './NavigationBar';
 
 class App extends React.Component {
 	render() {
+		const style = {
+			paddingTop: '80px'
+		}
+
 		return (
-			<div className="container">
+			<div className="container" style={style}>
 				<DevTool/>
 				<NavigationBar store={this.props.route.imgurStore}/>
 				{this.props.children}

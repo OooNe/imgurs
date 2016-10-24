@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export function request (url) {
     const request = new Request(url, {
         headers: new Headers({
@@ -8,4 +10,8 @@ export function request (url) {
 
     return fetch(request)
         .then(results => results.json());
+}
+
+export function formatDate(date) {
+    return moment(date).format('YYYY-MM-DD HH:mm');
 }
