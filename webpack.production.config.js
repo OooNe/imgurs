@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 var loaders = require('./webpack.loaders');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 	entry: [
@@ -17,7 +18,7 @@ module.exports = {
 	module: {
 		loaders: loaders.concat([{
 			test: /\.css$/,
-			loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
+			loader: ExtractTextPlugin.extract('style', 'css')
 		}])
 	},
 	plugins: [
