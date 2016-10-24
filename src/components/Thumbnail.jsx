@@ -3,13 +3,17 @@ import { Link } from 'react-router'
 
 export default class Thumbnail extends React.Component {
 	render() {
+        const thumbnail = this.props.thumbnail;
+
+        const imageStyle = {
+            paddingBottom: `${thumbnail.ratio * 100}%`,
+            backgroundImage: `url(${thumbnail.thumbnail})`,
+            backgroundSize: 'cover'
+        };
+
 		return (
             <div className="col-xs-3">
-                <Link to={`/${this.props.thumbnail.id}`} className="thumbnail">
-                    {!this.props.thumbnail.is_album ?
-                        <img src={this.props.thumbnail.thumbnail} /> : 
-                        <p>{this.props.thumbnail.title}</p>
-                    }
+                <Link to={`/${thumbnail.id}`} className="thumbnail" style={imageStyle}>
                 </Link>
             </div>
 		)

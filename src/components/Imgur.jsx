@@ -1,5 +1,7 @@
 import React from 'react';
-import {observer} from "mobx-react";
+import {observer} from 'mobx-react';
+
+import CommentsList from './Comments';
 
 @observer
 export default class Imgur extends React.Component {
@@ -24,19 +26,7 @@ export default class Imgur extends React.Component {
                     </div>
                 </div>
 
-                {currentComments.map(comment => (
-                    <div className="panel panel-default">
-                        <div className="panel-heading">
-                            {comment.author}
-                            <div className="pull-right">
-                                ups: {comment.ups} 
-                                downs: {comment.downs}
-                                {comment.datetime}
-                            </div>
-                        </div>
-                        <div className="panel-body">{comment.comment}</div>
-                    </div>
-                ))}
+                <CommentsList comments={currentComments} />
             </div>
 		)
 	}

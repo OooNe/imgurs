@@ -28,7 +28,7 @@ export default class imgurStore {
 		
 		request(url).then(results => {
 			this.page[this.category]++;
-			const data = this.mapImagesToThumbnail(results.data.items);
+			const data = this.mapImages(results.data.items);
 
 			this.mergeFetchDataWithStorage(data);
 		});
@@ -67,10 +67,11 @@ export default class imgurStore {
 		}, 1);
 	}
 
-	mapImagesToThumbnail(array) {
+	mapImages(array) {
 		return array.map(item => {
 			if (this.isImage(item.type)) {
 				item.thumbnail = this.createThumbnail(item.link);
+				item.ratio = item.height / item.width; 
 			}
 
 			return item;
@@ -79,6 +80,10 @@ export default class imgurStore {
 
 	createThumbnail(link) {
 		const tmpArr = link.split('.');
+
+		if(tmpArr[tmpArr.length - 1] === 'gif') {
+			return link;
+		}
 
 		tmpArr[tmpArr.length - 2] += 'm';
 
