@@ -17,6 +17,11 @@ export default class Imgur extends React.Component {
     render() {
         const { currentImgur, currentComments } = this.props.route.imgurStore;
 
+        const containerStyle = {
+            maxWidth: '800px',
+            margin: '0 auto'
+        };
+
         const textStyle = {
             color: '#FFF'
         };
@@ -28,7 +33,7 @@ export default class Imgur extends React.Component {
         };
 
         return (
-            <article className="row">
+            <article style={containerStyle}>
                 <section className="thumbnail" style={style}>
                     <header className="caption">
                         <h3 style={textStyle}>{currentImgur.title}</h3>
