@@ -2,103 +2,99 @@ import {observable, computed, action} from 'mobx';
 import { request } from '../utils/utils';
 
 export default class imgurStore {
-	@observable imgurs = {
-		cosplay: [],
-		funny: [],
-		gaming: []
-	};
+    @observable imgurs = {
+        cosplay: [],
+        funny: [],
+        gaming: []
+    };
 
-	@observable page = {};
-	@observable category;
-	@observable currentImgur = {};
-	@observable currentComments = [];
+    @observable page = {};
+    @observable category;
+    @observable currentImgur = {};
+    @observable currentComments = [];
 
-	categories = ['cosplay', 'funny', 'gaming'];
+    categories = ['cosplay', 'funny', 'gaming'];
 
-	constructor() {
-		this.categories.forEach((category) => {
-			this.page[category] = 1;
-		});
+    constructor() {
+        this.categories.forEach((category) => {
+            this.page[category] = 1;
+        });
 
-		this.setCategory('cosplay');
-	}
+        this.setCategory('cosplay');
+    }
 
-	@action fetchData() {
-		const url = `https://api.imgur.com/3/gallery/t/${this.category}/viral/${this.page[this.category]}`;
-		
-		request(url).then(results => {
-			this.page[this.category]++;
-			const data = this.mapImages(results.data.items);
+    @action fetchData() {
+        const url = `https://api.imgur.com/3/gallery/t/${this.category}/viral/${this.page[this.category]}`;
+        
+        request(url).then(results => {
+            this.page[this.category]++;
+            const data = this.mapImages(results.data.items);
 
-			this.mergeFetchDataWithStorage(data);
-		});
-	}
+            this.mergeFetchDataWithStorage(data);
+        });
+    }
 
-	@action fetchSingleImgur(id) {
-		const url = `https://api.imgur.com/3/image/${id}`;
-		
-		request(url).then(results => {
-			this.currentImgur = results.data;
-		});
-	}
+    @action fetchSingleImgur(id) {
+        const url = `https://api.imgur.com/3/image/${id}`;
+        
+        request(url).then(results => {
+            this.currentImgur = results.data;
+        });
+    }
 
-	@action fetchImgurComments(id) {
-		const url = `https://api.imgur.com/3/image/${id}/comments`;
-		
-		request(url).then(results => {
-			this.currentComments = results.data;
-		});
-	}
+    @action fetchImgurComments(id) {
+        const url = `https://api.imgur.com/3/image/${id}/comments`;
+        
+        request(url).then(results => {
+            this.currentComments = results.data;
+        });
+    }
 
-	@action setCategory(category) {
-		if (this.category !== category) {
-			this.category = category;
-		}
+    @action setCategory(category) {
+        if (this.category !== category) {
+            this.category = category;
+        }
 
-		if(!this.imgurs[this.category].length) {
+        if(!this.imgurs[this.category].length) {
             this.fetchData();
         }
-	}
+    }
 
-	mergeFetchDataWithStorage(data) {
-		setTimeout(() => {
-			data
-				.filter(item => item.nsfw === false && item.type)
-				.forEach(item => this.imgurs[this.category].push(item));
-			
-			// this.imgurs[this.category] = this.imgurs[this.category]
-			// 	.concat(data.filter(item => item.nsfw === false && item.type));
-		}, 10);
-	}
+    mergeFetchDataWithStorage(data) {
+        setTimeout(() => {
+            data.filter(item => item.nsfw === false && item.type)
+                .forEach(item => this.imgurs[this.category].push(item));
+        }, 10);
+    }
 
-	mapImages(array) {
-		return array.map(item => {
-			if (this.isImage(item.type)) {
-				item.thumbnail = this.createThumbnail(item.link);
-				item.ratio = item.height / item.width; 
-			}
+    mapImages(array) {
+        return array.map(item => {
+            if (this.isImage(item.type)) {
+                item.thumbnail = this.createThumbnail(item.link);
+                item.ratio = item.height / item.width; 
+            }
 
-			return item;
-		});
-	}
+            return item;
+        });
+    }
 
-	createThumbnail(link) {
-		const tmpArr = link.split('.');
+    createThumbnail(link) {
+        const tmpArr = link.split('.');
 
-		if(tmpArr[tmpArr.length - 1] === 'gif') {
-			return link;
-		}
+        if(tmpArr[tmpArr.length - 1] === 'gif') {
+            return link;
+        }
 
-		tmpArr[tmpArr.length - 2] += 'm';
+        tmpArr[tmpArr.length - 2] += 'm';
 
-		return tmpArr.join('.');
-	}
+        return tmpArr.join('.');
+    }
 
-	isImage(type) {
-		if (type) {
-			return type.match(/^image\//);
-		}
+    isImage(type) {
+        if (type) {
+            return type.match(/^image\//);
+        }
 
-		return false;
-	}
+        return false;
+    }
 }

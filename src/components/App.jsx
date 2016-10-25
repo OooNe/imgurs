@@ -6,19 +6,19 @@ import Home from './Home';
 import NavigationBar from './NavigationBar';
 
 class App extends React.Component {
-	render() {
-		const style = {
-			paddingTop: '80px'
-		}
+    render() {
+        const style = {
+            paddingTop: '80px'
+        }
 
-		return (
-			<div className="container" style={style}>
-				<DevTool/>
-				<NavigationBar store={this.props.route.imgurStore}/>
-				{this.props.children}
-			</div>
-		);
-	}
+        return (
+            <div className="container" style={style}>
+                <DevTool/>
+                <NavigationBar store={this.props.route.imgurStore}/>
+                {this.props.children}
+            </div>
+        );
+    }
 }
 
 export default App

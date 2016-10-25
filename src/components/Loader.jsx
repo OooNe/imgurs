@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router'
 
 export default class Loader extends React.Component {
-	render() {
+    render() {
         const style = {
             textAlign: 'center'
         }
 
-		return (
+        return (
             <div style={style}>
                 <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -41,6 +41,6 @@ export default class Loader extends React.Component {
                     </g>
                 </svg>
             </div>
-		)
-	}
+        )
+    }
 }

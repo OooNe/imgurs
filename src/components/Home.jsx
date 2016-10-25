@@ -18,9 +18,13 @@ export default class About extends React.Component {
     fetchData() {
         this.store.fetchData();
     }
+
+    itemRender(item) { 
+        return <Thumbnail key={Math.random() * 100000} thumbnail={item} />
+    }
     
-	render() {        
-		return (
+    render() {        
+        return (
             <div className="row">
                 <InfiniteScroll
                     next={this.fetchData}
@@ -28,11 +32,10 @@ export default class About extends React.Component {
                     loader={<Loader />}>
                     <Masonry>
                     {this.store.imgurs[this.store.category].map(item => (
-                        <Thumbnail key={Math.random() * 100000} thumbnail={item} />
                     ))}
                     </Masonry>
                 </InfiniteScroll>
             </div>
-		)
-	}
+        )
+    }
 }

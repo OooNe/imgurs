@@ -14,10 +14,10 @@ export default class Imgur extends React.Component {
         this.props.route.imgurStore.fetchImgurComments(id);
     }
 
-	render() {
+    render() {
         const { currentImgur, currentComments } = this.props.route.imgurStore;
 
-		return (
+        return (
             <div className="row">
                 <div className="thumbnail">
                     <img src={currentImgur.link} />
@@ -28,6 +28,6 @@ export default class Imgur extends React.Component {
 
                 <CommentsList comments={currentComments} />
             </div>
-		)
-	}
+        )
+    }
 }

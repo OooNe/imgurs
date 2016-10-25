@@ -3,11 +3,11 @@ import React from 'react';
 import { formatDate } from '../utils/utils';
 
 export default class Comment extends React.Component {
-	render() {
+    render() {
         const comment = this.props.comment;
         const timeStamp = comment.datetime * 1000;
 
-		return (
+        return (
             <div className="panel panel-default">
                 <div className="panel-heading">
                     {comment.author}
@@ -19,6 +19,6 @@ export default class Comment extends React.Component {
                 </div>
                 <div className="panel-body">{comment.comment}</div>
             </div>
-		)
-	}
+        )
+    }
 }
