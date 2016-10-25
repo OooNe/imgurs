@@ -21,19 +21,15 @@ class NavigationBar extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <Link className="navbar-brand" to="/">Appka</Link>
+                        <Link className="navbar-brand" to="/">ImgurView</Link>
                     </div>
                     <div id="navbar" className="collapse navbar-collapse">
                         <ul className="nav navbar-nav">
-                            <li className={imgurStore.category === 'cosplay' ? 'active' : ''}>
-                                <Link to="/" onClick={() => {this.setCategory('cosplay')}}>Cosplay</Link>
-                            </li>
-                            <li className={imgurStore.category === 'funny' ? 'active' : ''}>
-                                <Link to="/" onClick={() => {this.setCategory('funny')}}>Funny</Link>
-                            </li>
-                            <li className={imgurStore.category === 'gaming' ? 'active' : ''}>
-                                <Link to="/" onClick={() => {this.setCategory('gaming')}}>Gaming</Link>
-                            </li>
+                            {imgurStore.categories.map((category, index) => (
+                                <li className={imgurStore.category === category ? 'active' : ''}>
+                                    <Link to="/" onClick={() => {this.setCategory(category)}}>{category}</Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>
