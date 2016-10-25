@@ -1,4 +1,4 @@
-import {observable, computed, action} from 'mobx';
+import {observable, computed, action, transaction} from 'mobx';
 import { request } from '../utils/utils';
 
 export default class imgurStore {
@@ -61,10 +61,10 @@ export default class imgurStore {
     }
 
     mergeFetchDataWithStorage(data) {
-        setTimeout(() => {
+        transaction(() => {
             data.filter(item => item.nsfw === false && item.type)
                 .forEach(item => this.imgurs[this.category].push(item));
-        }, 10);
+        });
     }
 
     mapImages(array) {
