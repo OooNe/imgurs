@@ -62,7 +62,7 @@ export default class imgurStore {
 
     mergeFetchDataWithStorage(data) {
         transaction(() => {
-            data.filter(item => item.nsfw === false && item.type)
+            data.filter(item => item.nsfw === false && item.type && item.ratio < 4)
                 .forEach(item => this.imgurs[this.category].push(item));
         });
     }
