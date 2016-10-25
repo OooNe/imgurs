@@ -8,8 +8,8 @@ export default class Comments extends React.Component {
 
         return (
             <div>
-                {comments.map(comment => (
-                    <Comment comment={comment} />
+                {comments.map((comment, index) => (
+                    <Comment key={index} comment={comment} />
                 ))}
             </div>
         )

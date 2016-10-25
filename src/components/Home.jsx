@@ -23,15 +23,20 @@ export default class About extends React.Component {
         return <Thumbnail key={Math.random() * 100000} thumbnail={item} />
     }
     
-    render() {        
+    render() {
+        const masonryOptions = {
+            transitionDuration: 0
+        };
+
         return (
             <div className="row">
                 <InfiniteScroll
                     next={this.fetchData}
                     hasMore={true}
                     loader={<Loader />}>
-                    <Masonry>
+                    <Masonry options={masonryOptions}>
                     {this.store.imgurs[this.store.category].map(item => (
+                        this.itemRender(item)
                     ))}
                     </Masonry>
                 </InfiniteScroll>

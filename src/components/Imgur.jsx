@@ -17,13 +17,24 @@ export default class Imgur extends React.Component {
     render() {
         const { currentImgur, currentComments } = this.props.route.imgurStore;
 
+        const textStyle = {
+            color: '#FFF'
+        };
+
+        const style = {
+            backgroundColor: '#000',
+            border: '5px solid #FFF',
+            borderRadius: 0,
+        };
+
         return (
             <div className="row">
-                <div className="thumbnail">
-                    <img src={currentImgur.link} />
+                <div className="thumbnail" style={style}>
                     <div className="caption">
-                        <h3></h3>
+                        <h3 style={textStyle}>{currentImgur.title}</h3>
+                        <h4 style={textStyle}>{currentImgur.description}</h4>
                     </div>
+                    <img src={currentImgur.link} />
                 </div>
 
                 <CommentsList comments={currentComments} />
