@@ -27,7 +27,10 @@ class NavigationBar extends React.Component {
                         <ul className="nav navbar-nav">
                             {imgurStore.categories.map((category, index) => (
                                 <li className={imgurStore.category === category ? 'active' : ''}>
-                                    <Link to="/" onClick={() => {this.setCategory(category)}}>{category}</Link>
+                                    <Link to="/" onClick={() => {
+                                        window.scroll(0, 0);
+                                        this.setCategory(category)}
+                                    }>{category}</Link>
                                 </li>
                             ))}
                         </ul>

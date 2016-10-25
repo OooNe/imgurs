@@ -20,7 +20,7 @@ export default class About extends React.Component {
     }
 
     itemRender(item) { 
-        return <Thumbnail key={Math.random() * 100000} thumbnail={item} />
+        return <Thumbnail key={item.id} thumbnail={item} />
     }
     
     render() {
