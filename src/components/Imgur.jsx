@@ -28,17 +28,17 @@ export default class Imgur extends React.Component {
         };
 
         return (
-            <div className="row">
-                <div className="thumbnail" style={style}>
-                    <div className="caption">
+            <article className="row">
+                <section className="thumbnail" style={style}>
+                    <header className="caption">
                         <h3 style={textStyle}>{currentImgur.title}</h3>
                         <h4 style={textStyle}>{currentImgur.description}</h4>
-                    </div>
+                    </header>
                     <img src={currentImgur.link} />
-                </div>
+                </section>
 
                 <CommentsList comments={currentComments} />
-            </div>
+            </article>
         )
     }
 }

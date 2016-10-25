@@ -9,7 +9,7 @@ export default class Loader extends React.Component {
         };
 
         return (
-            <div style={style}>
+            <figure style={style}>
                 <svg width="120" height="30" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill="#fff">
                     <circle cx="15" cy="15" r="15">
                         <animate attributeName="r" from="15" to="15"
@@ -42,7 +42,7 @@ export default class Loader extends React.Component {
                                 repeatCount="indefinite" />
                     </circle>
                 </svg>
-            </div>
+            </figure>
         )
     }
 }

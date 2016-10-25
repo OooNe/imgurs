@@ -29,7 +29,7 @@ export default class About extends React.Component {
         };
 
         return (
-            <div className="row">
+            <section className="row">
                 <InfiniteScroll
                     next={this.fetchData}
                     hasMore={true}
@@ -40,7 +40,7 @@ export default class About extends React.Component {
                     ))}
                     </Masonry>
                 </InfiniteScroll>
-            </div>
+            </section>
         )
     }
 }

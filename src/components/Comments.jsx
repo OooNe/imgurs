@@ -7,11 +7,11 @@ export default class Comments extends React.Component {
         const comments = this.props.comments;
 
         return (
-            <div>
+            <section>
                 {comments.map((comment, index) => (
                     <Comment key={index} comment={comment} />
                 ))}
-            </div>
+            </section>
         )
     }
 }

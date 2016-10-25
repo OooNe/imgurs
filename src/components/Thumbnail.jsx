@@ -21,10 +21,10 @@ export default class Thumbnail extends React.Component {
         };
 
 		return (
-            <div className="col-xs-3">
+            <article className="col-xs-12 col-sm-6 col-md-3">
                 <Link to={`/${thumbnail.id}`} className="thumbnail" style={imageStyle}>
                 </Link>
-            </div>
+            </article>
 		)
 	}
 }

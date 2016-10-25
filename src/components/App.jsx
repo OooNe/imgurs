@@ -16,9 +16,9 @@ class App extends React.Component {
         return (
             <div className="container-fluid" style={style}>
                 <NavigationBar store={this.props.route.imgurStore}/>
-                <div className="container">
+                <main className="container">
                     {this.props.children}
-                </div>
+                </main>
             </div>
         );
     }

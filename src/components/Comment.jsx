@@ -21,7 +21,7 @@ export default class Comment extends React.Component {
 
         return (
             <div className="panel" style={panelStyle}>
-                <div className="panel-heading" style={panelHeadingStyle}>
+                <header className="panel-heading" style={panelHeadingStyle}>
                     <strong>{comment.author}</strong>
                     <div className="pull-right">
                         <span className="label label-success">
@@ -30,13 +30,11 @@ export default class Comment extends React.Component {
                         <span className="label label-danger">
                             <i className="fa fa-thumbs-o-down" aria-hidden="true"></i> {comment.downs}
                         </span> &nbsp;
-
-                        <span className="label label-info">
+                        <time className="label label-info">
                             <i className="fa fa-clock-o" aria-hidden="true"></i> {formatDate(timeStamp)}
-                        </span>
-
+                        </time>
                     </div>
-                </div>
+                </header>
                 <div className="panel-body">{comment.comment}</div>
             </div>
         )
